@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+<title>{% block title %} - Cadastre-se {% endblock %}</title>
+<style>
+    body{
+        background-image: url(https://images.unsplash.com/photo-1493723843671-1d655e66ac1c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
+    }
+    input{
+        margin-top:20px;
+        height: 30px;
+        width: 150px;
+        border-radius: 5px;
+            
+    }
+    input[type="submit"]{
+        background-color: rgba(7, 179, 185, 0.753);
+        color: rgb(255, 255, 255);
+        border: none;
+        border-radius: 5px;
+    }
+
+</style>
+
+{% block main  %}
+
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert {{message.tags}}">
+            {{message}}
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    <form action="/postsignUp/" method="post">
+        {% csrf_token %}
+        <br/>
+        <h2>Cadastre-se</h2>
+        
+        <p>Por favor, preencha este formulário</p>
+    
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="username">Usuario</label>
+                <input type="name" class="form-control"  id="Username" name="name" placeholder="Seu nome"><br><br>
+        <!-- Email: -->
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Email" >E-mail</label>
+                <input type="email" class="form-control"  id="Email" name="email" placeholder="Seu ID de e-mail"><br><br>
+            </div>
+        </div>
+        <div class="form-row">
+        <!-- Password: -->
+            <div class="col-md-6 mb-3">
+                <label for="Password">Senha</label>
+                <input type="password" class="form-control"  id="Password" name="pass" placeholder="Senha"><br><br>
+            </div>
+            <!-- RepeatPassword: -->
+            <div class="col-md-6 mb-3">
+                <label for="confirm_password">Confirmar senha</label>
+                <input type="password" class="form-control"  id="confirm_password" name="pass-repeat" placeholder=" Repetir senha"><br><br>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+              <input name="remember" class="form-check-input" type="checkbox" checked="checked"  id="invalidCheck2" required>
+              <label class="form-check-label" for="invalidCheck2">
+                Lembrar-me?
+              </label>
+            </div>
+        </div>
+        <input class="btn btn-outline-primary col-md-3" type="submit" value="Cadastre-se">
+        <br><br>
+    </form>
+</div>
+ {% endblock %}

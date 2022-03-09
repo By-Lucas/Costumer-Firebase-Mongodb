@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+<title>{% block title %} - Login {% endblock %}</title>
+
+<style>
+    body{
+        background-image: url(https://images.unsplash.com/photo-1493723843671-1d655e66ac1c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
+    }
+        input{
+        margin-top:20px;
+        height: 30px;
+            padding: 12px 20px;
+            width: 150px;
+            margin: 8px 0;
+        border-radius: 5px;
+    }
+    input[type="submit"]{
+        background-color: rgba(7, 179, 185, 0.753);
+        color: rgb(255, 255, 255);
+        border: none;
+        border-radius: 5px;
+    }
+    button{
+        background-color: rgba(7, 179, 185, 0.753);
+        color: white;
+        width: 150px;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+    }
+</style>
+
+{% block main %}
+
+<div class="container">
+    {% if message %}
+    <script>
+        alert('{{ message }}');
+    </script>
+    {% endif %}
+
+    <form action="/postsignIn/" method="post">
+        {% csrf_token %}
+        <br/>
+    <!-- Enter Your Email: -->
+        <div class="col-md-6 mb-3">
+            <label for="Email">E-mail</label>
+            <input  class="form-control" type="email"id="Email" name="email"><br><br>
+        </div>
+    <!-- Enter Your Password: -->
+        <div class="col-md-6 mb-3">
+            <label for="Password">Senha</label>
+            <input  class="form-control" type="password" id="Password" name="pass"><br><br>
+
+            
+       
+        <div class="form-group">
+            <div class="form-check">
+              <input name="remember" class="form-check-input" type="checkbox" checked="checked" name="remember"  id="invalidCheck2" required>
+              <label class="form-check-label" for="invalidCheck2">
+                Lembrar-me?
+              </label>
+            </div>
+            
+        </div> </div>
+        <div class="form-row">
+            
+            <input class="btn btn-outline-primary col-md-2" type="submit" value="Entrar">
+            
+            <div class="col-md-2 mb-3">
+                <a style="color: rgb(20, 105, 233);padding: 10px 0; margin-left: 10px;" href="{% url 'resetar_senha' %}" style="color: black;">
+                    Esqueceu a senha?
+                </a>
+            </div>
+        </div>
+
+
+        
+
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,203 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/modal-login.css' %}">
+    <script src="{% static 'js/modal-login.js' %}"></script>
+ 
+    
+    <title> Costumer{% block title %} {% endblock %}</title>
+    
+</head>
+<body>
+
+  <div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar">
+      <div class="p-4 pt-5">
+        <a href="{% url 'logar' %}" >
+          <img class="img logo rounded-circle mb-5" src="{% static 'media/logo/costumer.png'%}" alt="">
+        </a>
+        
+        {% if user.is_authenticated %}
+        <p class="usuario">Usuário: <span class="text-success">
+          {{email}}
+        </span></p>
+        {% else %}
+        <p>Não logado</p>
+        {% endif %}
+
+        <ul class="list-unstyled components mb-5">
+          <li>
+            <a href="{% url 'home' %}">Dashboard</a>
+        </li>
+          <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">home 0</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Editar </a>
+                </li>
+              
+                <li>
+                  <a href="#">Criar </a>
+                </li>
+              
+              <li>
+                  <a href="#">Home 2</a>
+              </li>
+              <li>
+                  <a href="#">Home 3</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+              <a href="#">Funcio...</a>
+          </li>
+          <li>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Opções</a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+              <li>
+                  <a href="{% url 'resetar_senha' %}">Recuperar senha</a>
+              </li>
+              <li>
+                  <a href="#">Page 2</a>
+              </li>
+              <li>
+                  <a href="#">Page 3</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Portfolio</a>
+          </li>
+          <li>
+            <a href="#">Contatos</a>
+          </li>
+        </ul>
+
+        <div class="footer">
+          <p><!-- Link para Colorlib não pode ser removido. O modelo está licenciado sob CC BY 3.0. -->
+                  Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                  Todos os direitos reservados. <br>
+                  Desenvolvedor <i class="icon-heart" aria-hidden="true"></i>: <a href="" target="_blank">Lucas Silva</a>
+                  <!-- Link para Colorlib não pode ser removido. O modelo está licenciado sob CC BY 3.0 -->
+              </p>
+        </div>
+
+      </div>
+    </nav>
+        
+        <!-- pagina Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+            
+            <button type="button" id="sidebarCollapse" class="btn btn-outline-primary">
+              <i class="fa fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+            
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Portfolio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cadastre_se' %}">Cadastre-se</a>
+                </li>
+                <li class="nav-item">
+                {% if user.is_authenticated %}
+                  <a style="margin-left: 30px;" class="btn btn-outline-success" onclick="location.href='{% url 'signup' %}' ">Login</a>
+                  <a style="margin-left: 30px;" class="btn btn-outline-danger" onclick="location.href='{% url 'log' %}' ">Logout</a>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'cadastre_se' %}">Cadastre-se</a>
+                </li>
+                
+                <label class="btn btn-outline-success" for="dialog_state">Login</label>
+
+                   
+                {% endif %}
+              </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        {% block main %} {% endblock %}
+    </div>
+  </div>
+
+
+<!-- MODAL DE LOGIN ---------------------------------------->
+<input type="checkbox" name="dialog_state" id="dialog_state" class="dialog_state">
+<div id='dialog'>
+  <label id="dlg-back" for="dialog_state"></label>
+  <div id='dlg-wrap'>
+
+    <label id="dlg-close" for="dialog_state"><i class="icon ion-ios-close-empty"></i></label>
+    <h2 id='dlg-header'>Pagina de Login</h2>
+    <div id='dlg-content'>
+      Efetua seu login. Se estiver esquiecido a senha é só ir até em esqueci a senha e pedir a alteração
+    </div>
+    <div id='dlg-prompt'>
+
+      <form   method="POST" action="{% url 'logar' %}"> {% csrf_token %}
+        <br>
+        <div class="form-row align-items-center">
+          <div class="form-group col-md-8">
+            <label for="inputEmail4">Usuário</label>
+            <input type="text" name="username"class="form-control" id="inputEmail4" placeholder="Usuário">
+          </div>
+          
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <label for="inputPassword4">Senha</label>
+            <input type="password" name="password" class="form-control" id="inputPassword4" placeholder="Senha">
+          </div>
+        </div>
+
+        <button  style="margin-left: 30px;" class="button positive" type="submit">
+        Fazer login
+        </button>
+        
+        <div class='button'><i class="icon ion-ios-close-empty">
+        </i> Não sei minha senha</div>
+        <br>
+        
+      </form>
+      
+    </div>
+  </div>
+</div>
+<!-- FIM DO MODAL DE LOGIN ---------------------------------------->
+  
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

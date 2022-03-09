@@ -1,0 +1,7 @@
+__Pycache__
+*.*~
+*.pyc
+.idea
+venv
+db.sqlite3
+bibliotecas.txt

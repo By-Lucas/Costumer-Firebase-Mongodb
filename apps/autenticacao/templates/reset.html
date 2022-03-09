@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+<title>{% block title %} - Cadastre-se {% endblock %}</title>
+{% load static %}
+
+
+<link rel="stylesheet" href="{% static '/css/Reset.css/' %}">
+<link rel="stylesheet" type="text/css" href="{% static '/css/footer.css/' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+
+{% block main %}
+
+<div class="container">
+	{%if msg%}
+		<script>
+			window.alert('{{msg}}');
+		</script>
+	{% endif%}
+
+		<div class="inner">
+		<h1>Alterar senha</h1><br>
+		<form action="{% url 'reset_password' %}" method="POST">
+			{% csrf_token %}
+			<div class="col-md-5 mb-3">
+				<label for="validationDefault01">E-mail para recuperação</label>
+				<input type="email" class="form-control" name="email" id="email" placeholder="Digite se e-mail" required><br><br>
+			
+			<input class="btn btn-outline-primary" type="submit" value="Enviar link para resetar">
+		</div>
+		</form>
+	</div>
+</div>
+
+{% endblock %}
