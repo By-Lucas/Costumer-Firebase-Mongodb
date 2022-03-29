@@ -13,5 +13,16 @@
 
 **FrontEnd desenvolvido baseado:** https://customer.io/product-demo/
 
+**Tecnologias**
+- Firebase
+- Django
+- Python
+- Go.js
+- JavaScript
+- Mongodb
+- Pandas
+- css
+- html
+- bootstrap
 
 *OBS: Em Desenvolvimento*
